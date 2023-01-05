@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { calendarApi } from "../api";
-import { clearErrorMessage, onChecking, onLogin, onLogout } from "../store";
+import {
+  clearErrorMessage,
+  onChecking,
+  onLogin,
+  onLogout,
+  onLogoutCalendar,
+} from "../store";
 
 export const useAuthStore = () => {
   const { status, user, errorMessage } = useSelector((state) => state.auth);
@@ -22,7 +28,6 @@ export const useAuthStore = () => {
 
       //   console.log({ resp });
     } catch (error) {
-      console.log({ error });
       dispatch(onLogout("Incorrect credentials!"));
       setTimeout(() => {
         dispatch(clearErrorMessage());
@@ -46,10 +51,7 @@ export const useAuthStore = () => {
       localStorage.setItem("token-init-date", new Date().getTime());
 
       dispatch(onLogin({ name: data.name, uid: data.uid }));
-
-      //   console.log({ resp });
     } catch (error) {
-      console.log({ error });
       dispatch(onLogout(error.response.data?.msg || ""));
       setTimeout(() => {
         dispatch(clearErrorMessage());
@@ -77,6 +79,7 @@ export const useAuthStore = () => {
   const startLogout = () => {
     localStorage.clear();
     dispatch(onLogout());
+    dispatch(onLogoutCalendar());
   };
   return {
     //* Properties

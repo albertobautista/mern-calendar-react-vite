@@ -63,7 +63,6 @@ export const CalendarModal = () => {
     setFormSubmitted(true);
 
     const difference = differenceInSeconds(formValues.end, formValues.start);
-    console.log({ difference });
 
     if (isNaN(difference) || difference <= 0) {
       Swal.fire({

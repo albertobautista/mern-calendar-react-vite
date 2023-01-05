@@ -38,12 +38,6 @@ export const LoginPage = () => {
 
   const registerSubmit = (event) => {
     event.preventDefault();
-    console.log({
-      registerName,
-      registerEmail,
-      registerPassword,
-      registerPassword2,
-    });
 
     if (registerPassword !== registerPassword2) {
       Swal.fire({
